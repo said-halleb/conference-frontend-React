@@ -1,0 +1,17 @@
+/* components/Banner.css */
+.banner {
+    background-size: cover;
+    background-position: center;
+    height: 250px;
+    /* Ajuste selon tes besoins */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    .banner-title {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+}
+
