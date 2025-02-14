@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
-import RoomList from './components/RoomList';
-import BookingForm from './components/BookingForm';
-import Login from './components/Login';
-import CreateUserForm from './components/CreateUserForm';
-import CreateRoomForm from './components/CreateRoomForm';
-import { fetchBookings } from './services/api';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
-import Banner from './components/Banner';
-import banner from './images/banner.jpg';
+import RoomList from '@/components/RoomList/RoomList';
+import BookingForm from '@/components/BookingForm/BookingForm';
+import Login from '@/components/Login/Login';
+import CreateUserForm from '@/components/CreateUserForm/CreateUserForm';
+import CreateRoomForm from '@/components/CreateRoomForm/CreateRoomForm';
+import { fetchBookings } from '@/services/api';
+import 'bootstrap/dist/css/bootstrap.min.css'; 
+import Banner from '@/components/Banner/Banner';
+import banner from '@/images/banner.jpg';
 const App = () => {
   const [bookings, setBookings] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
-  const navigate = useNavigate(); // Hook pour la redirection
+  const navigate = useNavigate(); 
 
   const getBookings = async () => {
     const data = await fetchBookings();

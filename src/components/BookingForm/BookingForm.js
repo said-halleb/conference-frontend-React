@@ -1,6 +1,6 @@
 // src/components/BookingForm.js
 import React, { useState, useEffect } from 'react';
-import { createBooking, fetchRooms, fetchUsers } from '../services/api';
+import { createBooking, fetchRooms, fetchUsers } from '@/services/api';
 import './BookingForm.scss';
 
 const BookingForm = ({ refreshBookings }) => {

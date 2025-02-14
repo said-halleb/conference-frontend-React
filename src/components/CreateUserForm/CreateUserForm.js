@@ -1,6 +1,6 @@
 // src/components/CreateUserForm.js
 import React, { useState } from 'react';
-import { createUser } from '../services/api';
+import { createUser } from '@/services/api';
 import './CreateUserForm.scss';
 
 const CreateUserForm = () => {

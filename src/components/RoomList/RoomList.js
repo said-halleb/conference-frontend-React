@@ -1,6 +1,6 @@
 // src/components/RoomList.js
 import React, { useEffect, useState } from 'react';
-import { fetchRooms } from '../services/api';
+import { fetchRooms } from '@/services/api';
 import './RoomList.scss';
 
 const RoomList = () => {
