@@ -1,6 +1,6 @@
 // src/components/CreateRoomForm.js
 import React, { useState } from 'react';
-import { createRoom } from '../services/api';
+import { createRoom } from '@/services/api';
 import './CreateRoomForm.scss';
 
 const CreateRoomForm = () => {
