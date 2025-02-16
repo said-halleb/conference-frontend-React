@@ -29,7 +29,7 @@ const Login = ({ onLogin }) => {
         <form className="login-form" onSubmit={handleSubmit}>
           <h2>{strings.loginForm.title}</h2>
           <div className="form-group">
-            <label>Email</label>
+            <label>{strings.loginForm.email}</label>
             <input
               type="email"
               className="form-control"
@@ -39,7 +39,7 @@ const Login = ({ onLogin }) => {
             />
           </div>
           <div className="form-group">
-            <label>Mot de passe</label>
+            <label>{strings.loginForm.password}</label>
             <input
               type="password"
               className="form-control"
@@ -48,7 +48,7 @@ const Login = ({ onLogin }) => {
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary">Se connecter</button>
+          <button type="submit" className="btn btn-primary bg-dark border-0">{strings.loginForm.login}</button>
         </form>
       </div>
     </div>

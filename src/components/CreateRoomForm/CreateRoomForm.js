@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { createRoom } from '@/services/api';
 import './CreateRoomForm.scss';
+import strings from '@/config/strings';
 
 const CreateRoomForm = () => {
   const [name, setName] = useState('');
@@ -20,11 +21,11 @@ const CreateRoomForm = () => {
   };
 
   return (
-    <section className="create-room-form">
-      <h2 className="mt-4 mb-3">Créer une Salle de Conférence</h2>
+  <section className="create-room-form">
+      <h2 className="mt-4 mb-3">{strings.createRoomForm.title}</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Nom :</label>
+          <label>{strings.createRoomForm.nameLabel}</label>
           <input
             type="text"
             className="form-control"
@@ -34,7 +35,7 @@ const CreateRoomForm = () => {
           />
         </div>
         <div className="form-group">
-          <label>Capacité :</label>
+          <label>{strings.createRoomForm.capacityLabel}</label>
           <input
             type="number"
             className="form-control"
@@ -44,7 +45,7 @@ const CreateRoomForm = () => {
           />
         </div>
         <div className="form-group">
-          <label>Localisation :</label>
+          <label>{strings.createRoomForm.locationLabel}</label>
           <input
             type="text"
             className="form-control"
@@ -53,16 +54,18 @@ const CreateRoomForm = () => {
           />
         </div>
         <div className="form-group">
-          <label>Équipements :</label>
+          <label>{strings.createRoomForm.equipmentsLabel}</label>
           <input
             type="text"
             className="form-control"
             value={equipments}
             onChange={(e) => setEquipments(e.target.value)}
-            placeholder="Séparez par des virgules"
+            placeholder={strings.createRoomForm.equipmentsPlaceholder}
           />
         </div>
-        <button type="submit" className="btn btn-primary mt-3">Créer</button>
+        <button type="submit" className="btn btn-primary mt-3 bg-dark border-0">
+          {strings.createRoomForm.createButton}
+        </button>
       </form>
     </section>
   );

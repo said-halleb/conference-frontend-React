@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { createUser } from '@/services/api';
 import './CreateUserForm.scss';
-
+import strings from '@/config/strings';
 const CreateUserForm = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -20,11 +20,11 @@ const CreateUserForm = () => {
   };
 
   return (
-    <section className="create-user-form">
-      <h2 className="mt-4 mb-3">Créer un Utilisateur</h2>
+  <section className="create-user-form">
+      <h2 className="mt-4 mb-3">{strings.createUserForm.title}</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Nom :</label>
+          <label>{strings.createUserForm.nameLabel}</label>
           <input
             type="text"
             className="form-control"
@@ -34,7 +34,7 @@ const CreateUserForm = () => {
           />
         </div>
         <div className="form-group">
-          <label>Email :</label>
+          <label>{strings.createUserForm.emailLabel}</label>
           <input
             type="email"
             className="form-control"
@@ -44,7 +44,7 @@ const CreateUserForm = () => {
           />
         </div>
         <div className="form-group">
-          <label>Mot de passe :</label>
+          <label>{strings.createUserForm.passwordLabel}</label>
           <input
             type="password"
             className="form-control"
@@ -54,13 +54,15 @@ const CreateUserForm = () => {
           />
         </div>
         <div className="form-group">
-          <label>Rôle :</label>
+          <label>{strings.createUserForm.roleLabel}</label>
           <select className="form-control" value={role} onChange={(e) => setRole(e.target.value)}>
-            <option value="user">Utilisateur</option>
-            <option value="admin">Administrateur</option>
+            <option value="user">{strings.createUserForm.roleUser}</option>
+            <option value="admin">{strings.createUserForm.roleAdmin}</option>
           </select>
         </div>
-        <button type="submit" className="btn btn-primary mt-3">Créer</button>
+        <button type="submit" className="btn btn-primary mt-3 bg-dark border-0">
+          {strings.createUserForm.createButton}
+        </button>
       </form>
     </section>
   );

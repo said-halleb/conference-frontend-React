@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { createBooking, fetchRooms, fetchUsers } from '@/services/api';
 import './BookingForm.scss';
+import strings from '@/config/strings';
 
 const BookingForm = ({ refreshBookings }) => {
   const [user_id, setUserId] = useState('');
@@ -33,13 +34,13 @@ const BookingForm = ({ refreshBookings }) => {
   };
 
   return (
-    <section className="booking-form">
-      <h2 className="mt-4 mb-3">Réserver une Salle de Conférence</h2>
+   <section className="booking-form">
+      <h2 className="mt-4 mb-3">{strings.bookingForm.title}</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Utilisateur :</label>
+          <label>{strings.bookingForm.userLabel}</label>
           <select className="form-control" value={user_id} onChange={(e) => setUserId(e.target.value)} required>
-            <option value="">Sélectionner un utilisateur</option>
+            <option value="">{strings.bookingForm.selectUser}</option>
             {users.map((user) => (
               <option key={user.id} value={user.id}>
                 {user.name}
@@ -48,9 +49,9 @@ const BookingForm = ({ refreshBookings }) => {
           </select>
         </div>
         <div className="form-group">
-          <label>Salle :</label>
+          <label>{strings.bookingForm.roomLabel}</label>
           <select className="form-control" value={room_id} onChange={(e) => setRoomId(e.target.value)} required>
-            <option value="">Sélectionner une salle</option>
+            <option value="">{strings.bookingForm.selectRoom}</option>
             {rooms.map((room) => (
               <option key={room.id} value={room.id}>
                 {room.name}
@@ -59,7 +60,7 @@ const BookingForm = ({ refreshBookings }) => {
           </select>
         </div>
         <div className="form-group">
-          <label>Début :</label>
+          <label>{strings.bookingForm.startLabel}</label>
           <input
             type="datetime-local"
             className="form-control"
@@ -69,7 +70,7 @@ const BookingForm = ({ refreshBookings }) => {
           />
         </div>
         <div className="form-group">
-          <label>Fin :</label>
+          <label>{strings.bookingForm.endLabel}</label>
           <input
             type="datetime-local"
             className="form-control"
@@ -79,7 +80,7 @@ const BookingForm = ({ refreshBookings }) => {
           />
         </div>
         <div className="form-group">
-          <label>Statut :</label>
+          <label>{strings.bookingForm.statusLabel}</label>
           <input
             type="text"
             className="form-control"
@@ -87,10 +88,11 @@ const BookingForm = ({ refreshBookings }) => {
             onChange={(e) => setStatus(e.target.value)}
           />
         </div>
-        <button type="submit" className="btn btn-primary mt-3">Réserver</button>
+        <button type="submit" className="btn btn-primary mt-3 bg-dark border-0">{strings.bookingForm.bookButton}</button>
       </form>
     </section>
   );
 };
+
 
 export default BookingForm;
