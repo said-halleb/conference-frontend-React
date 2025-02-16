@@ -1,6 +1,7 @@
 // src/components/RoomList.scss
+@import "@/styles/variables.scss";
 .card {
-    border: 1px solid #dee2e6;
+    border: .0625rem solid $gray;
     border-radius: 0.25rem;
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
   }

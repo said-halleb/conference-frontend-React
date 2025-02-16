@@ -1,14 +1,13 @@
-/* components/Banner.css */
+@import "@/styles/variables.scss";
 .banner {
     background-size: cover;
     background-position: center;
-    height: 250px;
-    /* Ajuste selon tes besoins */
+    height: 15.625rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color: $white;
+    text-shadow: .125rem .125rem .25rem rgba(0, 0, 0, 0.5);
     .banner-title {
             font-size: 2rem;
             font-weight: bold;

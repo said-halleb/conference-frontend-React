@@ -9,6 +9,7 @@ import { fetchBookings } from '@/services/api';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import Banner from '@/components/Banner/Banner';
 import banner from '@/images/banner.jpg';
+import strings from '@/config/strings';
 const App = () => {
   const [bookings, setBookings] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
@@ -47,7 +48,7 @@ const App = () => {
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
           <a className="navbar-brand" href="/">
-            Gestion de Réservation de Salles
+            {strings.navbar.brand}
           </a>
           <button
             className="navbar-toggler"
@@ -65,11 +66,11 @@ const App = () => {
               {currentUser && (
                 <>
                   <li className="nav-item">
-                    <span className="nav-link">Bienvenue, {currentUser.name}</span>
+                    <span className="nav-link"> {strings.navbar.welcome} {currentUser.name}</span>
                   </li>
                   <li className="nav-item">
                     <button className="btn btn-link nav-link" onClick={handleLogout}>
-                      Déconnexion
+                          {strings.navbar.logout}
                     </button>
                   </li>
                 </>
@@ -86,7 +87,7 @@ const App = () => {
           element={
             currentUser ? (
               <div className="container mt-4">
-              <Banner title="Gestion de Réservation de Salles" backgroundImage={banner} />
+              <Banner title={strings.dashboard.bannerTitle} backgroundImage={banner} />
 
                 <div className="row">
                   <div className="col-md-8">
@@ -104,17 +105,17 @@ const App = () => {
                 </div>
 
                 <section className="mt-5">
-                  <h2 className="mb-4">Réservations</h2>
+                  <h2 className="mb-4">{strings.dashboard.bookingsTitle}</h2>
                   <div className="table-responsive">
                     <table className="table table-striped table-hover">
                       <thead>
                         <tr>
-                          <th>#</th>
-                          <th>Utilisateur</th>
-                          <th>Salle</th>
-                          <th>Début</th>
-                          <th>Fin</th>
-                          <th>Statut</th>
+                          <th>{strings.dashboard.tableHeaders.id}</th>
+                          <th>{strings.dashboard.tableHeaders.user}</th>
+                          <th>{strings.dashboard.tableHeaders.room}</th>
+                          <th>{strings.dashboard.tableHeaders.start}</th>
+                          <th>{strings.dashboard.tableHeaders.end}</th>
+                          <th>{strings.dashboard.tableHeaders.status}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -131,14 +132,14 @@ const App = () => {
                       </tbody>
                     </table>
                   </div>
-                  <button onClick={getBookings} className="btn btn-primary mt-3">
-                    Rafraîchir les Réservations
+                  <button onClick={getBookings} className="btn btn-primary mt-3 bg-dark border-0">
+                {strings.dashboard.refreshButton}
                   </button>
                 </section>
               </div>
             ) : (
               <div className="container mt-5 text-center">
-                <p className="lead">Vous devez vous connecter pour accéder à cette page.</p>
+                <p className="lead">{strings.dashboard.loginPrompt}</p>
               </div>
             )
           }
