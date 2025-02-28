@@ -16,6 +16,7 @@ const strings = {
     endLabel: 'End:',
     statusLabel: 'Status:',
     bookButton: 'Book',
+    equipmentsLabel: 'Equipments:',
   },
    createRoomForm: {
     title: 'Create a Conference Room',
@@ -26,6 +27,9 @@ const strings = {
     equipmentsPlaceholder: 'Separate by commas',
     createButton: 'Create',
     successMessage: 'Room created successfully!',
+    locationLabel : 'Location',
+    preferencesLabel : 'Preferences :'
+
   },
     createUserForm: {
     title: 'Create a User',
@@ -42,6 +46,8 @@ const strings = {
     title: 'Conference Room List',
     capacityLabel: 'Capacity:',
     equipmentsLabel: 'Equipments:',
+    preferencesLabel:'Preferences:',
+    locationLabel : 'Location:'
   },
     navbar: {
     brand: 'Room Booking Management',

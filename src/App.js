@@ -1,3 +1,4 @@
+// src/App.js
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import RoomList from '@/components/RoomList/RoomList';
@@ -10,37 +11,31 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Banner from '@/components/Banner/Banner';
 import banner from '@/images/banner.jpg';
 import strings from '@/config/strings';
-const App = () => {
+import { AuthProvider, useAuth } from '@/context/AuthContext';
+
+const AppContent = () => {
+  const { currentUser, isAdmin, isManager, logout } = useAuth();
+  const navigate = useNavigate();
   const [bookings, setBookings] = useState([]);
-  const [currentUser, setCurrentUser] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const navigate = useNavigate(); 
 
   const getBookings = async () => {
-    const data = await fetchBookings();
-    setBookings(data);
+    try {
+      const data = await fetchBookings();
+      setBookings(data);
+    } catch (err) {
+      console.error('Error fetching bookings:', err);
+    }
   };
 
   useEffect(() => {
-    const loggedUser = JSON.parse(localStorage.getItem('user'));
-    if (loggedUser) {
-      setCurrentUser(loggedUser);
-      setIsAdmin(loggedUser.role === 'admin');
+    if (currentUser) {
+      getBookings();
     }
-  }, []);
-
-  const handleLogin = (user) => {
-    localStorage.setItem('user', JSON.stringify(user));
-    setCurrentUser(user);
-    setIsAdmin(user.role === 'admin');
-    navigate('/dashboard'); // Rediriger vers le tableau de bord après la connexion
-  };
+  }, [currentUser]);
 
   const handleLogout = () => {
-    localStorage.removeItem('user'); // Supprimer l'utilisateur du localStorage
-    setCurrentUser(null); // Réinitialiser l'utilisateur actuel
-    setIsAdmin(false); // Réinitialiser le statut admin
-    navigate('/'); // Rediriger vers la page de connexion
+    logout();
+    navigate('/');
   };
 
   return (
@@ -66,11 +61,13 @@ const App = () => {
               {currentUser && (
                 <>
                   <li className="nav-item">
-                    <span className="nav-link"> {strings.navbar.welcome} {currentUser.name}</span>
+                    <span className="nav-link">
+                      {strings.navbar.welcome} {currentUser.name}
+                    </span>
                   </li>
                   <li className="nav-item">
                     <button className="btn btn-link nav-link" onClick={handleLogout}>
-                          {strings.navbar.logout}
+                      {strings.navbar.logout}
                     </button>
                   </li>
                 </>
@@ -81,31 +78,28 @@ const App = () => {
       </nav>
 
       <Routes>
-        <Route path="/" element={<Login onLogin={handleLogin} />} />
+        <Route path="/" element={<Login />} />
         <Route
           path="/dashboard"
           element={
             currentUser ? (
               <div className="container mt-4">
-              <Banner title={strings.dashboard.bannerTitle} backgroundImage={banner} />
-
+                <Banner title={strings.dashboard.bannerTitle} backgroundImage={banner} />
                 <div className="row">
-                  <div className="col-md-8">
+                  <div className={(isAdmin || isManager) ? "col-md-8" : "col-md-12"}>
                     <RoomList />
                     <BookingForm refreshBookings={getBookings} />
                   </div>
-                  <div className="col-md-4">
-                    {isAdmin && (
-                      <>
-                        <CreateUserForm />
-                        <CreateRoomForm />
-                      </>
-                    )}
-                  </div>
+                  {(isAdmin || isManager) && (
+                    <div className="col-md-4">
+                      <CreateUserForm />
+                      <CreateRoomForm />
+                    </div>
+                  )}
                 </div>
 
-                <section className="mt-5">
-                  <h2 className="mb-4">{strings.dashboard.bookingsTitle}</h2>
+                <section className="mt-5 bg-dark p-4 rounded mt-5">
+                  <h2 className="mb-4 text-white text-center">{strings.dashboard.bookingsTitle}</h2>
                   <div className="table-responsive">
                     <table className="table table-striped table-hover">
                       <thead>
@@ -118,23 +112,21 @@ const App = () => {
                           <th>{strings.dashboard.tableHeaders.status}</th>
                         </tr>
                       </thead>
-                      <tbody>
+                   <tbody>
                         {bookings.map((booking, index) => (
                           <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>{booking.user_id}</td>
-                            <td>{booking.room_id}</td>
+                            <td>{booking.id}</td>
+                            <td>{booking.user_name}</td>
+                            <td>{booking.room_name}</td> 
                             <td>{new Date(booking.start_time).toLocaleString()}</td>
                             <td>{new Date(booking.end_time).toLocaleString()}</td>
                             <td>{booking.status}</td>
                           </tr>
                         ))}
                       </tbody>
-                    </table>
+             </table>
                   </div>
-                  <button onClick={getBookings} className="btn btn-primary mt-3 bg-dark border-0">
-                {strings.dashboard.refreshButton}
-                  </button>
+    
                 </section>
               </div>
             ) : (
@@ -149,10 +141,12 @@ const App = () => {
   );
 };
 
-const AppWrapper = () => (
-  <Router>
-    <App />
-  </Router>
+const App = () => (
+  <AuthProvider>
+    <Router>
+      <AppContent />
+    </Router>
+  </AuthProvider>
 );
 
-export default AppWrapper;
+export default App;

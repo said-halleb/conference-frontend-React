@@ -1,8 +1,53 @@
 // src/components/RoomList.scss
 @import "@/styles/variables.scss";
-.card {
-    border: .0625rem solid $gray;
-    border-radius: 0.25rem;
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+// src/components/RoomList.scss
+.room-list {
+  .mb-4 {
+    text-align: center;
+    color: $black-secondary;
   }
-  
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .card {
+    border: none;
+    border-radius: .5rem;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: translateY(-0.3125rem);
+    }
+
+    .card-body {
+      padding: .9375rem;
+
+      .card-title {
+        font-size: 1.25rem;
+        margin-bottom: .625rem;
+        color: $black-secondary-2;
+      }
+
+      .card-text {
+        margin-bottom: .5rem;
+        font-size: 0.95rem;
+
+        strong {
+          color: $black-secondary-2;
+        }
+      }
+    }
+  }
+
+  .text-danger,
+  .text-muted {
+    margin: .625rem 0;
+  }
+}
